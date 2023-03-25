@@ -26,6 +26,10 @@ public class Availability {
 	
 	@Column(name = "id_hotel")
 	private Integer idHotel;
+	
+//	@ManyToOne
+//	@JoinColumn(name = "id_hotel", referencedColumnName= "id", nullable= false)
+//	private Hotel hotel;
 
 	public Availability() {
 	}
@@ -68,7 +72,7 @@ public class Availability {
 		return idHotel;
 	}
 
-	public void setIdHotel(Integer idHotel) {
+	public void setHotel(Integer idHotel) {
 		this.idHotel = idHotel;
 	}
 	

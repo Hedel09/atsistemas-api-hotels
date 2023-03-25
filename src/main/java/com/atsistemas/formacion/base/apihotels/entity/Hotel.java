@@ -25,22 +25,22 @@ public class Hotel {
 	@Column(name = "name")
 	private String name;
 	@Column(name="category")
-	private Double category;
+	private Integer category;
 	
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_hotel", referencedColumnName= "id", nullable= false, insertable = false, updatable = false)
 	private List<Availability> availabilities;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_hotel", referencedColumnName= "id", nullable= false, insertable = false, updatable = false)
-	private List<Booking> bookings;
+//	@OneToMany(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "id_hotel", referencedColumnName= "id", nullable= false, insertable = false, updatable = false)
+//	private List<Booking> bookings;
 	
 	public Hotel() {
 	}
 	
 	
 
-	public Hotel(Integer id, String name, Double category) {
+	public Hotel(Integer id, String name, Integer category) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -65,11 +65,11 @@ public class Hotel {
 		this.name = name;
 	}
 
-	public Double getCategory() {
+	public Integer getCategory() {
 		return category;
 	}
 
-	public void setCategory(Double category) {
+	public void setCategory(Integer category) {
 		this.category = category;
 	}
 
@@ -87,15 +87,15 @@ public class Hotel {
 
 
 
-	public List<Booking> getBookings() {
-		return bookings;
-	}
-
-
-
-	public void setBookings(List<Booking> bookings) {
-		this.bookings = bookings;
-	}
+//	public List<Booking> getBookings() {
+//		return bookings;
+//	}
+//
+//
+//
+//	public void setBookings(List<Booking> bookings) {
+//		this.bookings = bookings;
+//	}
 	
 	
 	
