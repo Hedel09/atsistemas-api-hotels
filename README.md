@@ -132,7 +132,7 @@ Voy primero a mapear las peticiones http que hay que hacer para cada funcionalid
 		    (opcional) "category": Integer,
 		    (opcional) "name": String
 		}
-	</td>
+		</td>
 	</tr>
 	<tr>
  		<td>Reserva de habitación </td>
@@ -148,7 +148,7 @@ Voy primero a mapear las peticiones http que hay que hacer para cada funcionalid
 	</tr>
 	<tr>
  		<td>Consulta de reservas hotel </td>
-		<td>GET http://localhost:8080/hotels/{idHotel}/bookings </td
+		<td>GET http://localhost:8080/hotels/{idHotel}/bookings </td>
 		<td>
 		{
 		    "dateFrom": Date(YYYY-MM-DD),
