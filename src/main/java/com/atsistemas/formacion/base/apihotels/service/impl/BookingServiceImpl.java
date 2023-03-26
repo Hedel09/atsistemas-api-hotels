@@ -67,7 +67,7 @@ public class BookingServiceImpl implements BookingService{
 		if(booking.getDateTo().isBefore(booking.getDateFrom())) {
 			throw new DateFormatException("The check-out date can't be before the check-in date");
 		}
-		List<Availability> availabilities = repoAvailability.getAvailabilityBetweenDates(booking.getDateFrom(), booking.getDateTo());
+		List<Availability> availabilities = repoAvailability.getAvailabilityBetweenDatesByHotel(booking.getDateFrom(), booking.getDateTo(), booking.getIdHotel());
 		//Check if there is availability in the if. If there isn't, we raise the error in the else
 		if (availabilities.size() == (int) ChronoUnit.DAYS.between(booking.getDateFrom(), booking.getDateTo().plusDays(1))){
 			
@@ -79,7 +79,7 @@ public class BookingServiceImpl implements BookingService{
 			Booking res = repo.save(booking);
 			res.setHotel(aux.get());
 			
-			repoAvailability.getAvailabilityBetweenDates(res.getDateFrom(), res.getDateTo()).stream()
+			availabilities.stream()
 					.forEach(a -> {
 						a.setRooms(a.getRooms()-1);
 						repoAvailability.save(a);

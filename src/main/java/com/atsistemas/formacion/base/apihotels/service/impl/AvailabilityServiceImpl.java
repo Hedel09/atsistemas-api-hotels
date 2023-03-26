@@ -63,7 +63,7 @@ public class AvailabilityServiceImpl implements AvailabilityService{
 			throw new DateFormatException("The check-out date can't be before the check-in date");
 		}
 		return checkIn.datesUntil(checkOut.plusDays(1))
-			.map(d -> repo.findByDate(d)
+			.map(d -> repo.findByDateAndIdHotel(d, idHotel)
 					.map(a -> {
 						a.setRooms(a.getRooms() + rooms);
 						return repo.save(a);

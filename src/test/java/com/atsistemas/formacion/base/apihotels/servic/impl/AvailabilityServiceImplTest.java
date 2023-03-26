@@ -96,9 +96,9 @@ public class AvailabilityServiceImplTest extends ServiceImplTestConstants {
 	// · TEST CORRECT OPEN AVAILABILITY
 	@Test
 	public void testOpenAvailability() {
-		Mockito.when(availabilityRepositoryMock.findByDate(LocalDate.of(2024, 10, 23))).thenReturn(Optional.of(TEST_AVAILABILITY_1));
-		Mockito.when(availabilityRepositoryMock.findByDate(LocalDate.of(2024, 10, 24))).thenReturn(Optional.of(TEST_AVAILABILITY_2));
-		Mockito.when(availabilityRepositoryMock.findByDate(LocalDate.of(2024, 10, 25))).thenReturn(Optional.of(TEST_AVAILABILITY_3));
+		Mockito.when(availabilityRepositoryMock.findByDateAndIdHotel(LocalDate.of(2024, 10, 23), DEFAULT_HOTEL_ID_1)).thenReturn(Optional.of(TEST_AVAILABILITY_1));
+		Mockito.when(availabilityRepositoryMock.findByDateAndIdHotel(LocalDate.of(2024, 10, 24), DEFAULT_HOTEL_ID_1)).thenReturn(Optional.of(TEST_AVAILABILITY_2));
+		Mockito.when(availabilityRepositoryMock.findByDateAndIdHotel(LocalDate.of(2024, 10, 25), DEFAULT_HOTEL_ID_1)).thenReturn(Optional.of(TEST_AVAILABILITY_3));
 		Mockito.when(availabilityRepositoryMock.save(TEST_AVAILABILITY_1))
 		.thenReturn(TEST_AVAILABILITY_1);
 		Mockito.when(availabilityRepositoryMock.save(TEST_AVAILABILITY_2))
@@ -116,9 +116,9 @@ public class AvailabilityServiceImplTest extends ServiceImplTestConstants {
 		Assertions.assertTrue(listAvailabilities.size() > 0);
 		Assertions.assertEquals(3, listAvailabilities.size());
 		
-		Mockito.verify(availabilityRepositoryMock).findByDate(LocalDate.of(2024, 10, 23));
-		Mockito.verify(availabilityRepositoryMock).findByDate(LocalDate.of(2024, 10, 24));
-		Mockito.verify(availabilityRepositoryMock).findByDate(LocalDate.of(2024, 10, 25));
+		Mockito.verify(availabilityRepositoryMock).findByDateAndIdHotel(LocalDate.of(2024, 10, 23), DEFAULT_HOTEL_ID_1);
+		Mockito.verify(availabilityRepositoryMock).findByDateAndIdHotel(LocalDate.of(2024, 10, 24), DEFAULT_HOTEL_ID_1);
+		Mockito.verify(availabilityRepositoryMock).findByDateAndIdHotel(LocalDate.of(2024, 10, 25), DEFAULT_HOTEL_ID_1);
 		Mockito.verify(availabilityRepositoryMock).save(TEST_AVAILABILITY_1);
 		Mockito.verify(availabilityRepositoryMock).save(TEST_AVAILABILITY_2);
 		Mockito.verify(availabilityRepositoryMock).save(TEST_AVAILABILITY_3);

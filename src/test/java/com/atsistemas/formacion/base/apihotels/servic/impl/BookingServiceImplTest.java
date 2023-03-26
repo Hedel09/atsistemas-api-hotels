@@ -100,7 +100,7 @@ public class BookingServiceImplTest extends ServiceImplTestConstants {
 		.thenReturn(TEST_BOOKING_1);
 		Mockito.when(hotelRepositoryMock.findById(1))
 		.thenReturn(Optional.of(TEST_HOTEL_1));
-		Mockito.when(availabilityRepositoryMock.getAvailabilityBetweenDates(TEST_BOOKING_1.getDateFrom(), TEST_BOOKING_1.getDateTo()))
+		Mockito.when(availabilityRepositoryMock.getAvailabilityBetweenDatesByHotel(TEST_BOOKING_1.getDateFrom(), TEST_BOOKING_1.getDateTo(), TEST_BOOKING_1.getIdHotel()))
 		.thenReturn(List.of(TEST_AVAILABILITY_1, TEST_AVAILABILITY_2, TEST_AVAILABILITY_3));
 		Mockito.when(availabilityRepositoryMock.save(Mockito.any()))
 		.thenReturn(TEST_AVAILABILITY_1);
@@ -114,6 +114,7 @@ public class BookingServiceImplTest extends ServiceImplTestConstants {
 		
 		Mockito.verify(bookingRepositoryMock).save(TEST_BOOKING_1);
 	}
+	
 	// · TEST SAVE WITH NULL BOOKING
 	@Test
 	public void testSaveNullBooking() {
@@ -141,14 +142,14 @@ public class BookingServiceImplTest extends ServiceImplTestConstants {
 	// · TEST SAVE NO AVAILABILITIES
 	@Test
 	public void testSaveBookingNoAvailabilities() {
-		Mockito.when(availabilityRepositoryMock.getAvailabilityBetweenDates(TEST_BOOKING_1.getDateFrom(), TEST_BOOKING_1.getDateTo()))
+		Mockito.when(availabilityRepositoryMock.getAvailabilityBetweenDatesByHotel(TEST_BOOKING_1.getDateFrom(), TEST_BOOKING_1.getDateTo(), TEST_BOOKING_1.getIdHotel()))
 		.thenReturn(List.of(TEST_AVAILABILITY_1));
 		
 
 		Assertions.assertThrows(NoAvailabilityException.class,() -> bookingServiceImpl.saveBooking(TEST_BOOKING_1));
 		
 		
-		Mockito.verify(availabilityRepositoryMock).getAvailabilityBetweenDates(TEST_BOOKING_1.getDateFrom(), TEST_BOOKING_1.getDateTo());
+		Mockito.verify(availabilityRepositoryMock).getAvailabilityBetweenDatesByHotel(TEST_BOOKING_1.getDateFrom(), TEST_BOOKING_1.getDateTo(), TEST_BOOKING_1.getIdHotel());
 	}
 	
 }
