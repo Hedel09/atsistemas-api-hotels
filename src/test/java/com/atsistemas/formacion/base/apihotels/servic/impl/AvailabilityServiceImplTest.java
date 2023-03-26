@@ -135,14 +135,24 @@ public class AvailabilityServiceImplTest extends ServiceImplTestConstants {
 				OPEN_AVAILABILITY_ENTRY_WRONG_DATES.getRooms()));
 	}
 	
+	// · TEST OPEN AVAILABILITY PAST DATES
+	@Test
+	public void testOpenAvailabilityPastDates() {
+		Assertions.assertThrows(DateFormatException.class,() -> availabilityServiceImpl.openAvailability(
+				OPEN_AVAILABILITY_ENTRY_PAST_DATES.getIdHotel(),
+				OPEN_AVAILABILITY_ENTRY_PAST_DATES.getCheckIn(),
+				OPEN_AVAILABILITY_ENTRY_PAST_DATES.getCheckOut(),
+				OPEN_AVAILABILITY_ENTRY_PAST_DATES.getRooms()));
+	}
+	
 	// · TEST OPEN AVAILABILITY NULL PARAMS
 	@Test
 	public void testOpenAvailabilityNullParams() {
 		Assertions.assertThrows(NullParamsException.class,() -> availabilityServiceImpl.openAvailability(
 				null,
-				OPEN_AVAILABILITY_ENTRY_WRONG_DATES.getCheckIn(),
-				OPEN_AVAILABILITY_ENTRY_WRONG_DATES.getCheckOut(),
-				OPEN_AVAILABILITY_ENTRY_WRONG_DATES.getRooms()));
+				OPEN_AVAILABILITY_ENTRY.getCheckIn(),
+				OPEN_AVAILABILITY_ENTRY.getCheckOut(),
+				OPEN_AVAILABILITY_ENTRY.getRooms()));
 	}
 	
 }

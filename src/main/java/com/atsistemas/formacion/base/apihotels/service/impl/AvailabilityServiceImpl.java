@@ -56,6 +56,9 @@ public class AvailabilityServiceImpl implements AvailabilityService{
 			throw new NullParamsException("The request body must contain the following parameters: idHotel(Integer),"
 					+ " checkIn(Date), checkOut(Date) and rooms(Integer). All of those parameters also must be different from null.");
 		}
+		if(checkIn.isBefore(LocalDate.now()) || checkOut.isBefore(LocalDate.now())) {
+			throw new DateFormatException("Dates need to be in the future");
+		}
 		if(checkOut.isBefore(checkIn)) {
 			throw new DateFormatException("The check-out date can't be before the check-in date");
 		}

@@ -82,6 +82,9 @@ public class HotelServiceImpl implements HotelService{
 					+ " Additionally, you can filter the obtained hotels by name and category by adding the fields"
 					+ " name(String) and/or category(Integer) to the request body.");
 		}
+		if(checkIn.isBefore(LocalDate.now()) || checkOut.isBefore(LocalDate.now())) {
+			throw new DateFormatException("Dates need to be in the future");
+		}
 		if(checkOut.isBefore(checkIn)) {
 			throw new DateFormatException("The check-out date can't be before the check-in date");
 		}
@@ -115,6 +118,9 @@ public class HotelServiceImpl implements HotelService{
 		if(dateFrom==null || dateTo==null || idHotel==null) {
 			throw new NullParamsException("The request body must contain the following parameters to check bookings:,"
 					+ " dateFrom(Date), dateTo(Date). All of those parameters also must be different from null.");
+		}
+		if(dateFrom.isBefore(LocalDate.now()) || dateTo.isBefore(LocalDate.now())) {
+			throw new DateFormatException("Dates need to be in the future");
 		}
 		if(dateTo.isBefore(dateFrom)) {
 			throw new DateFormatException("dateTo can't be before dateFrom ");

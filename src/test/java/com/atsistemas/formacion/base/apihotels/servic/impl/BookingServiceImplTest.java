@@ -128,9 +128,15 @@ public class BookingServiceImplTest extends ServiceImplTestConstants {
 	public void testSaveBookingWrongDates() {
 		
 		Assertions.assertThrows(DateFormatException.class,() -> bookingServiceImpl.saveBooking(TEST_BOOKING_WRONG_DATES));
-		
-		
 	}
+	
+	// · TEST SAVE PAST DATES
+	@Test
+	public void testSaveBookingPastDates() {
+		
+		Assertions.assertThrows(DateFormatException.class,() -> bookingServiceImpl.saveBooking(TEST_BOOKING_PAST_DATES));
+	}
+		
 	// · TEST SAVE NO AVAILABILITIES
 	@Test
 	public void testSaveBookingNoAvailabilities() {

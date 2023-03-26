@@ -1,5 +1,6 @@
 package com.atsistemas.formacion.base.apihotels.service.impl;
 
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
@@ -58,6 +59,9 @@ public class BookingServiceImpl implements BookingService{
 		if(booking==null || booking.getIdHotel()==null || booking.getDateFrom()==null || booking.getDateTo()==null || booking.getEmail()==null) {
 			throw new NullParamsException("The request body must contain the following parameters to create a booking: idHotel(Integer),"
 					+ " dateFrom(Date), dateTo(Date) and email(String). All of those parameters also must be different from null.");
+		}
+		if(booking.getDateFrom().isBefore(LocalDate.now()) || booking.getDateTo().isBefore(LocalDate.now())) {
+			throw new DateFormatException("Dates need to be in the future");
 		}
 		//Check that DateFrom is before DateTo, if not, we raise an error
 		if(booking.getDateTo().isBefore(booking.getDateFrom())) {

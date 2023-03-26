@@ -29,9 +29,11 @@ public class ServiceImplTestConstants {
 	
 	protected static final CheckAvailabilityEntry CHECK_AVAILABILITY_ENTRY = new CheckAvailabilityEntry(LocalDate.of(2024, 10, 23), LocalDate.of(2024, 10, 25),null,null);
 	protected static final CheckAvailabilityEntry CHECK_AVAILABILITY_ENTRY_WRONG_DATES = new CheckAvailabilityEntry(LocalDate.of(2024, 10, 25), LocalDate.of(2024, 10, 23),null,null);
+	protected static final CheckAvailabilityEntry CHECK_AVAILABILITY_ENTRY_PAST_DATES = new CheckAvailabilityEntry(LocalDate.of(2021, 10, 23), LocalDate.of(2021, 10, 25),null,null);
 	
 	protected static final OpenAvailabilityEntry OPEN_AVAILABILITY_ENTRY = new OpenAvailabilityEntry(1,  LocalDate.of(2024, 10, 23), LocalDate.of(2024, 10, 25), 20);
 	protected static final OpenAvailabilityEntry OPEN_AVAILABILITY_ENTRY_WRONG_DATES = new OpenAvailabilityEntry(1,  LocalDate.of(2024, 10, 25), LocalDate.of(2024, 10, 23), 20);
+	protected static final OpenAvailabilityEntry OPEN_AVAILABILITY_ENTRY_PAST_DATES = new OpenAvailabilityEntry(1,  LocalDate.of(2021, 10, 23), LocalDate.of(2021, 10, 25), 20);
 	
 	
 	protected static final Integer DEFAULT_BOOKING_ID_1 = 1;
@@ -40,8 +42,10 @@ public class ServiceImplTestConstants {
 	protected static final Booking TEST_BOOKING_1 = new Booking(DEFAULT_BOOKING_ID_1, LocalDate.of(2024, 10, 23), LocalDate.of(2024, 10, 25), "test1@mail.com", 1);
 	protected static final Booking TEST_BOOKING_2 = new Booking(DEFAULT_BOOKING_ID_2, LocalDate.of(2024, 10, 24), LocalDate.of(2024, 10, 26), "test2@mail.com", 1);
 	protected static final Booking TEST_BOOKING_3 = new Booking(DEFAULT_BOOKING_ID_3, LocalDate.of(2024, 10, 25), LocalDate.of(2024, 10, 27), "test3@mail.com", 1);
-	protected static final Booking TEST_BOOKING_WRONG_DATES = new Booking(DEFAULT_BOOKING_ID_1, LocalDate.of(2024, 10, 25), LocalDate.of(2024, 10, 23), "test3@mail.com", 1);
-	
+	protected static final Booking TEST_BOOKING_WRONG_DATES = new Booking(DEFAULT_BOOKING_ID_1, LocalDate.of(2024, 10, 25), LocalDate.of(2024, 10, 23), "test4@mail.com", 1);
+	protected static final Booking TEST_BOOKING_PAST_DATES = new Booking(DEFAULT_BOOKING_ID_1, LocalDate.of(2021, 10, 23), LocalDate.of(2021, 10, 25), "test5@mail.com", 1);
+		
 	protected static final CheckBookingsEntry CHECK_BOOKING_ENTRY = new CheckBookingsEntry(LocalDate.of(2024, 10, 25), LocalDate.of(2024, 10, 27));
 	protected static final CheckBookingsEntry CHECK_BOOKING_ENTRY_WRONG_DATES = new CheckBookingsEntry(LocalDate.of(2024, 10, 27), LocalDate.of(2024, 10, 25));
+	protected static final CheckBookingsEntry CHECK_BOOKING_ENTRY_PAST_DATES = new CheckBookingsEntry(LocalDate.of(2021, 10, 25), LocalDate.of(2021, 10, 27));
 }

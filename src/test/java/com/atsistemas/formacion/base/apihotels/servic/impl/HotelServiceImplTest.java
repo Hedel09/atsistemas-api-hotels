@@ -177,6 +177,15 @@ public class HotelServiceImplTest extends ServiceImplTestConstants {
 				CHECK_AVAILABILITY_ENTRY_WRONG_DATES.getCategory()));
 	}
 	
+	// · TEST CHECK AVAILABILITY PAST DATES
+	@Test
+	public void testCheckAvailabilityPASTDates() {
+		
+		Assertions.assertThrows(DateFormatException.class,() -> hotelServiceImpl.checkAvailability(CHECK_AVAILABILITY_ENTRY_PAST_DATES.getCheckIn(),
+				CHECK_AVAILABILITY_ENTRY_PAST_DATES.getCheckOut(), CHECK_AVAILABILITY_ENTRY_PAST_DATES.getName(),
+				CHECK_AVAILABILITY_ENTRY_PAST_DATES.getCategory()));
+	}
+	
 	// · TEST CHECK AVAILABILITY NULL PARAMS
 	@Test
 	public void testCheckAvailabilityNullParams() {
@@ -208,6 +217,14 @@ public class HotelServiceImplTest extends ServiceImplTestConstants {
 		
 		Assertions.assertThrows(DateFormatException.class,() -> hotelServiceImpl.getBookingsByHotelInDateRange(CHECK_BOOKING_ENTRY_WRONG_DATES.getDateFrom(),
 				CHECK_BOOKING_ENTRY_WRONG_DATES.getDateTo(), DEFAULT_HOTEL_ID_1));
+	}
+	
+	// · TEST GET BOOKINGS PAST DATES
+	@Test
+	public void testGetBookingsByHotelInDateRangePastDates() {
+		
+		Assertions.assertThrows(DateFormatException.class,() -> hotelServiceImpl.getBookingsByHotelInDateRange(CHECK_BOOKING_ENTRY_PAST_DATES.getDateFrom(),
+				CHECK_BOOKING_ENTRY_PAST_DATES.getDateTo(), DEFAULT_HOTEL_ID_1));
 	}
 	
 	// · TEST GET BOOKINGS NULL PARAMS
