@@ -28,7 +28,7 @@ debo destacar que al comienzo del desarrollo de la API me encontré con un extra
  El error es el siguiente:
  ***************************
 APPLICATION FAILED TO START
-***************************
+
 Description:
 Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
 Reason: Failed to determine a suitable driver class
@@ -37,7 +37,7 @@ Action:
 Consider the following:
 	If you want an embedded database (H2, HSQL or Derby), please put it on the classpath.
 	If you have database settings to be loaded from a particular profile you may need to activate it (no profiles are currently active).
- 
+ ***************************
  Conseguí solucionarlo la primera vez añadiendo un espacio en el application.properties en la propiedad " spring.datasource.driver-class-name= org.postgresql.Driver ".
 
 
@@ -48,3 +48,66 @@ TESTS
 Para correr los tests, nos iremos al archivo dee tests que queramos ejecutar (están dentro de src/test/java dentro del paquete com.atsistemas.formacion.base.apihotels.servic.impl) y pulsaremos click derecho > Run As > JUnit Test.
 
 FUNCIONALIDADES
+Voy primero a mapear las peticiones http que hay que hacer para cada funcionalidad de las pedidas y después explico algunas cosas sobre restricciones.
+ Todos los RequestBody son tipo raw(json).
+ Crear Hotel - POST http://localhost:8080/hotels 
+ RequestBody
+ {
+    "name": String,
+    "category": Integer
+ }
+ 
+ Actualizar Hotel - PUT http://localhost:8080/hotels/{id}
+ RequestBody
+ {
+    "name": String,
+    "category": Integer
+}
+
+ Consultar Hotel - GET http://localhost:8080/hotels/{id}
+ 
+ Consulta de hoteles - GET http://localhost:8080/hotels 
+ 
+ Abrir disponibilidad - POST http://localhost:8080/availabilities
+ RequestBody
+ {
+    "idHotel": Integer,
+    "checkIn": Date(YYYY-MM-DD),
+    "checkOut": Date(YYYY-MM-DD),
+    "rooms": Integer
+}
+
+ Consulta de disponibilidad - GET http://localhost:8080/hotels/availability
+ RequestBody
+ {
+    "checkIn": Date(YYYY-MM-DD),
+    "checkOut": Date(YYYY-MM-DD),
+    (opcional) "category": Integer,
+    (opcional) "name": String
+}
+
+ Reserva de habitación - POST http://localhost:8080/bookings
+ RequestBody
+ {
+    "idHotel": Integer,
+    "dateFrom": Date(YYYY-MM-DD),
+    "dateTo": Date(YYYY-MM-DD),
+    "email": String
+}
+
+ Consulta de reservas hotel - GET http://localhost:8080/hotels/{idHotel}/bookings
+ RequestBody
+ {
+    "dateFrom": Date(YYYY-MM-DD),
+    "dateTo": Date(YYYY-MM-DD)
+}
+ Obtener reserva - GET http://localhost:8080/bookings/{id}
+ 
+ Cancelar reserva - DELETE http://localhost:8080/bookings/{id}
+ 
+ Esas serían las funcionalidades que se piden y cómo acceder a los recursos que dichas funcionalidades implican.
+ 
+ RESTRICCIONES DE LA API
+ En la API he establecido algunas restricciones sobre las fechas: 
+  - No se puede crear ni acceder a recursos con fechas en el pasado
+  - La fecha de inicio en cualquier situacion debe ser anterior a la fecha de fin
