@@ -11,18 +11,18 @@ public class AvailabilityDto {
 	
 	private Integer rooms;
 	
-	private HotelDto hotel;
+	private Integer idHotel;
 	
 
 	public AvailabilityDto() {
 	}
 
-	public AvailabilityDto(Integer id, LocalDate date, Integer rooms, HotelDto hotel) {
+	public AvailabilityDto(Integer id, LocalDate date, Integer rooms, Integer idHotel) {
 		super();
 		this.id = id;
 		this.date = date;
 		this.rooms = rooms;
-		this.hotel = hotel;
+		this.idHotel = idHotel;
 	}
 
 	
@@ -51,12 +51,12 @@ public class AvailabilityDto {
 		this.rooms = rooms;
 	}
 
-	public HotelDto getHotel() {
-		return hotel;
+	public Integer getIdHotel() {
+		return idHotel;
 	}
 
-	public void setHotel(HotelDto hotel) {
-		this.hotel = hotel;
+	public void setIdHotel(Integer hotel) {
+		this.idHotel = hotel;
 	}
 
 	

@@ -20,7 +20,6 @@ import com.atsistemas.formacion.base.apihotels.DTO.in.CheckAvailabilityEntry;
 import com.atsistemas.formacion.base.apihotels.DTO.in.CheckBookingsEntry;
 import com.atsistemas.formacion.base.apihotels.DTO.out.BookingDto;
 import com.atsistemas.formacion.base.apihotels.DTO.out.HotelDto;
-import com.atsistemas.formacion.base.apihotels.entity.Booking;
 import com.atsistemas.formacion.base.apihotels.entity.Hotel;
 import com.atsistemas.formacion.base.apihotels.mapper.BookingMapper;
 import com.atsistemas.formacion.base.apihotels.mapper.HotelMapper;
@@ -42,8 +41,10 @@ public class HotelController {
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Hotel> listHotels() {
-		return service.listHotels();
+	public List<HotelDto> listHotels() {
+		return service.listHotels().stream()
+				.map(h -> mapper.mapToDto(h))
+				.collect(Collectors.toList());
 	}
 	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -70,19 +71,24 @@ public class HotelController {
 	}
 	
 	@GetMapping(value = "/availability", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<HotelDto> checkAvailability(@RequestBody CheckAvailabilityEntry entry) {
-		return service.checkAvailability(entry.getCheckIn(), entry.getCheckOut(), entry.getName(), entry.getCategory()).stream()
+	public ResponseEntity<List<HotelDto>> checkAvailability(@RequestBody CheckAvailabilityEntry entry) {
+		List<HotelDto> res = service.checkAvailability(entry.getCheckIn(), entry.getCheckOut(), entry.getName(), entry.getCategory()).stream()
 				.map(h -> mapper.mapToDto(h))
 				.collect(Collectors.toList());
+		if(res.isEmpty()) {
+			return new ResponseEntity<>(res,HttpStatus.NO_CONTENT);
+		}else {
+			return new ResponseEntity<>(res,HttpStatus.OK);
+		}
 	}
 	
 	@GetMapping(value = "/{id}/bookings", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<BookingDto>> getBookingsByHotelInDateRange(@PathVariable(name = "id") Integer idHotel,@RequestBody CheckBookingsEntry entry) {
-		List<Booking> res = service.getBookingsByHotelInDateRange(entry.getDateFrom(), entry.getDateTo(), idHotel);
+		List<BookingDto> res = service.getBookingsByHotelInDateRange(entry.getDateFrom(), entry.getDateTo(), idHotel).stream()
+				.map(b -> mapperBooking.mapToDto(b))
+				.collect(Collectors.toList());
 		if(res != null) {
-			return new ResponseEntity<>(res.stream()
-					.map(b -> mapperBooking.mapToDto(b))
-					.collect(Collectors.toList()),HttpStatus.OK);
+			return new ResponseEntity<>(res,HttpStatus.OK);
 		}else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

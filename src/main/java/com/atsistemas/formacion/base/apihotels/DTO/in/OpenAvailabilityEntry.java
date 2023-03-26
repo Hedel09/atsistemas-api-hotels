@@ -2,11 +2,18 @@ package com.atsistemas.formacion.base.apihotels.DTO.in;
 
 import java.time.LocalDate;
 
+import org.springframework.lang.NonNull;
+
 public class OpenAvailabilityEntry {
 
+
+	@NonNull
 	private Integer idHotel;
+	@NonNull
 	private LocalDate checkIn;
+	@NonNull
 	private LocalDate checkOut;
+	@NonNull
 	private Integer rooms;
 	
 	public OpenAvailabilityEntry() {
