@@ -1,4 +1,4 @@
-package com.atsistemas.formacion.base.apihotels.servic.impl;
+package com.atsistemas.formacion.base.apihotels.constants;
 
 import java.time.LocalDate;
 
