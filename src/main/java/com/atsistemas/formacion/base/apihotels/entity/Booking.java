@@ -4,10 +4,14 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "bookings")
@@ -27,9 +31,12 @@ public class Booking {
 	@Column(name = "email")
 	private String email;
 	
-	@Column(name = "id_hotel")
+	@Column(name = "id_hotel", nullable= false)
 	private Integer idHotel;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_hotel", insertable = false, updatable = false)
+	private Hotel hotel;
 	
 	
 	public Booking() {
@@ -83,6 +90,18 @@ public class Booking {
 	public void setIdHotel(Integer idHotel) {
 		this.idHotel = idHotel;
 	}
+
+	public Hotel getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
+	
+	
+	
+	
 
 	
 	

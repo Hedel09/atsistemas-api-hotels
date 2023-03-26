@@ -12,4 +12,6 @@ public interface BookingService {
 	Booking saveBooking(Booking booking);
 
 	void deleteBooking(Integer id);
+	
+	
 }

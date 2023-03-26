@@ -1,5 +1,6 @@
 package com.atsistemas.formacion.base.apihotels.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.atsistemas.formacion.base.apihotels.entity.Availability;
@@ -10,8 +11,10 @@ public interface AvailabilityService {
 
 	Availability findAvailability(Integer id);
 
-	Availability saveAvailability(Availability availability);
-
 	void deleteAvailability(Integer id);
+	
+	List<Availability> openAvailability(Integer idHotel, LocalDate checkIn, LocalDate checkOut, Integer rooms);
+	
+	
 	
 }
